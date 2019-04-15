@@ -10,8 +10,18 @@
 
 import React, {Component} from 'react';
 import { HeaderWrap, Logo, Nav, NavItem, NavSearch, Addition  ,Buttion, SearchWrap} from './style';
-
+import { CSSTransition } from 'react-transition-group';
 class Header extends Component {
+
+	constructor(props) {
+		super(props);
+		this.state = {
+			focused: false,
+		};
+		this.handleInputFocus = this.handleInputFocus.bind(this);
+		this.handleInputBlur = this.handleInputBlur.bind(this);
+	}
+
 	render() {
 		return  (
 			<HeaderWrap>
@@ -24,8 +34,18 @@ class Header extends Component {
 						<span className="iconfont">&#xe636;</span>
 					</NavItem>
 					<SearchWrap>
-						<NavSearch></NavSearch>
-						<span className="iconfont">&#xe699;</span>
+						<CSSTransition
+							in={this.state.focused}
+							timeout={200}
+							classNames = 'slide'
+						>
+							<NavSearch
+								className = {this.state.focused ?'focused':''}
+								onFocus = {this.handleInputFocus}
+								onBlur = {this.handleInputBlur}
+							></NavSearch>
+						</CSSTransition>
+						<span className= {this.state.focused ?'focused iconfont':'iconfont'}>&#xe699;</span>
 					</SearchWrap>
 				</Nav>
 				<Addition>
@@ -37,6 +57,17 @@ class Header extends Component {
 				</Addition>
 			</HeaderWrap>
 		)
+	}
+
+	handleInputFocus () {
+		this.setState({
+			focused :true,
+		});
+	}
+	handleInputBlur () {
+		this.setState( {
+			focused: false,
+		})
 	}
 }
 
