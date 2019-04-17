@@ -13,10 +13,12 @@ import {
 	HomeLeft,
 	HomeRight
 } from "./tyle";
+import {connect} from "react-redux";
 import Topic from './components/Topic';
 import Recommend from './components/Recommend';
 import Writer from './components/Writer';
 import List from './components/List';
+import axios from 'axios';
 
 
 
@@ -36,6 +38,28 @@ class Home extends  Component {
 			</HomeWrapper>
 		)
 	}
+	componentDidMount() {
+		axios.get('/api/home.json').then( res => {
+			let result = res.data.data;
+			const action = {
+				type : 'change_home_data',
+				topList : result.topList,
+				articleList: result.articleList,
+				recommendList: result.recommendList,
+			};
+			this.props.changeHomeData(action);
+		})
+	}
 }
 
-export default Home;
+const mapState = state => ({
+
+});
+
+const mapDispatchToProps = dispatch => ({
+	changeHomeData (action) {
+		dispatch(action)
+	}
+});
+
+export default connect(mapState,mapDispatchToProps)(Home);

@@ -8,13 +8,28 @@
  * Created by aYang on 2019-04-17
  */
 import React, {Component} from 'react';
+import {connect} from "react-redux";
+import {RecommendItem,RecommendWrap} from "../tyle";
 
 class Recommend extends  Component {
 	render() {
+		let {list} = this.props;
 		return (
-			<div>Recommend~</div>
+			<RecommendWrap>
+				{
+					list.map( item => {
+						return (
+							<RecommendItem imgUrl={item.get('imgUrl')} key={item.get('id')}/>
+						)
+					})
+				}
+			</RecommendWrap>
 		)
 	}
 }
 
-export default Recommend;
+const mapState = state => ({
+	list: state.getIn(['home','recommendList'])
+});
+
+export default connect(mapState,null)(Recommend);
