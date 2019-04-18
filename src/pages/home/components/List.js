@@ -12,6 +12,7 @@ import {connect} from "react-redux";
 import {actionCreators} from '../store';
 
 import {ListItem , ListInfo, LoadMore} from "../tyle";
+import {Link} from "react-router-dom";
 
 class List extends  PureComponent {
 	render() {
@@ -20,17 +21,19 @@ class List extends  PureComponent {
 			<div>
 				{list.map( (item,index) => {
 					return (
-						<ListItem key={index}>
-							<img
-								className='list-pic'
-								src={item.get('imgUrl')}
-								alt='图片'
-							/>
-							<ListInfo>
-								<h3 className='title'>{item.get('title')}</h3>
-								<p className='desc'>{item.get('desc')}</p>
-							</ListInfo>
-						</ListItem>
+						<Link key={index} to='/detail'>
+							<ListItem>
+								<img
+									className='list-pic'
+									src={item.get('imgUrl')}
+									alt='图片'
+								/>
+								<ListInfo>
+									<h3 className='title'>{item.get('title')}</h3>
+									<p className='desc'>{item.get('desc')}</p>
+								</ListInfo>
+							</ListItem>
+						</Link>
 					)
 				})}
 				<LoadMore onClick={() => {this.props.getMoreList(page)}}>加载更多</LoadMore>

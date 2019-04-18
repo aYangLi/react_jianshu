@@ -26,6 +26,7 @@ import {
 	SearchInfoItem,
 	SearchInfoList,
 } from './style';
+import {Link} from "react-router-dom";
 
 import { CSSTransition } from 'react-transition-group';
 
@@ -68,7 +69,9 @@ class Header extends PureComponent{
 		const {focused, handleInputFocus, handleInputBlur, list} = this.props;
 		return (
 			<HeaderWrap>
-				<Logo></Logo>
+				<Link to='/'>
+					<Logo></Logo>
+				</Link>
 				<Nav>
 					<NavItem className='left active'>首页</NavItem>
 					<NavItem className='left'>下载App</NavItem>

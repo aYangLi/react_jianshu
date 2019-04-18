@@ -10,8 +10,8 @@ class App extends PureComponent {
   render() {
     return (
       <Provider className="App" store={store}>
-        <Header/>
         <BrowserRouter>
+          <Header/>
           <Route path='/' exact component ={Home}/>
           <Route path='/detail' exact component={Detail}/>
         </BrowserRouter>
