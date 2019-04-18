@@ -18,7 +18,8 @@ import Topic from './components/Topic';
 import Recommend from './components/Recommend';
 import Writer from './components/Writer';
 import List from './components/List';
-import axios from 'axios';
+import {actionCreators} from './store'
+
 
 
 
@@ -39,16 +40,7 @@ class Home extends  Component {
 		)
 	}
 	componentDidMount() {
-		axios.get('/api/home.json').then( res => {
-			let result = res.data.data;
-			const action = {
-				type : 'change_home_data',
-				topList : result.topList,
-				articleList: result.articleList,
-				recommendList: result.recommendList,
-			};
-			this.props.changeHomeData(action);
-		})
+		this.props.changeHomeData()
 	}
 }
 
@@ -57,8 +49,9 @@ const mapState = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-	changeHomeData (action) {
-		dispatch(action)
+	changeHomeData () {
+		const action = actionCreators.getHomeInfo();
+		dispatch(action);
 	}
 });
 
