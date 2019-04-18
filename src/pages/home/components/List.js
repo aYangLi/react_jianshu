@@ -7,13 +7,13 @@
  *
  * Created by aYang on 2019-04-17
  */
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {connect} from "react-redux";
 import {actionCreators} from '../store';
 
 import {ListItem , ListInfo, LoadMore} from "../tyle";
 
-class List extends  Component {
+class List extends  PureComponent {
 	render() {
 		const {list,page} = this.props;
 		return (

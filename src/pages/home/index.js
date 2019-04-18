@@ -7,11 +7,12 @@
  *
  * Created by aYang on 2019-04-17
  */
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {
 	HomeWrapper,
 	HomeLeft,
-	HomeRight
+	HomeRight,
+	BackTop
 } from "./tyle";
 import {connect} from "react-redux";
 import Topic from './components/Topic';
@@ -23,8 +24,14 @@ import {actionCreators} from './store'
 
 
 
-class Home extends  Component {
+class Home extends  PureComponent {
+
+	handleScrollTop () {
+		window.scrollTo(0,0);
+	}
+
 	render() {
+		let {showScroll} = this.props;
 		return (
 			<HomeWrapper>
 				<HomeLeft>
@@ -36,22 +43,40 @@ class Home extends  Component {
 					<Recommend/>
 					<Writer/>
 				</HomeRight>
+				{
+					showScroll?<BackTop onClick={this.handleScrollTop}>回顶</BackTop>:null
+				}
+
 			</HomeWrapper>
 		)
 	}
 	componentDidMount() {
-		this.props.changeHomeData()
+		this.props.changeHomeData();
+		this.bindEvents();
+	}
+	componentWillUnmount() {
+		window.removeEventListener('scroll',this.props.changeScrollTopShow)
+	}
+
+	bindEvents () {
+		window.addEventListener('scroll',this.props.changeScrollTopShow)
 	}
 }
 
 const mapState = state => ({
-
+	showScroll: state.getIn(['home','showScroll']),
 });
 
 const mapDispatchToProps = dispatch => ({
 	changeHomeData () {
-		const action = actionCreators.getHomeInfo();
-		dispatch(action);
+		dispatch(actionCreators.getHomeInfo());
+	},
+	changeScrollTopShow () {
+		if (document.documentElement.scrollTop > 100) {
+			dispatch(actionCreators.toggleTopShow(true));
+		} else {
+			dispatch(actionCreators.toggleTopShow(false));
+		}
 	}
 });
 

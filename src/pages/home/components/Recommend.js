@@ -7,11 +7,11 @@
  *
  * Created by aYang on 2019-04-17
  */
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {connect} from "react-redux";
 import {RecommendItem,RecommendWrap} from "../tyle";
 
-class Recommend extends  Component {
+class Recommend extends  PureComponent {
 	render() {
 		let {list} = this.props;
 		return (

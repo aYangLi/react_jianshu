@@ -8,7 +8,7 @@
  * Created by aYang on 2019-04-14
  */
 
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import { connect } from "react-redux";
 import { actionCreators } from './store';
 import {
@@ -31,7 +31,7 @@ import { CSSTransition } from 'react-transition-group';
 
 
 
-class Header extends Component{
+class Header extends PureComponent{
 	getListArea () {
 		const {focused, list, page, totalPage, mouseIn, handleMouseEnter, handleMouseLeave,changePage} = this.props;
 		const newList = list.toJS();

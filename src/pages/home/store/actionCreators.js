@@ -7,7 +7,7 @@
  *
  * Created by aYang on 2019-04-15
  */
-import { CHANGE_HOME_DATA,ADD_HOME_LIST } from "./constants";
+import { CHANGE_HOME_DATA,ADD_HOME_LIST ,TOGGLE_SCROLL_TOP} from "./constants";
 import axios from 'axios';
 
 const changeHomeData = result => ({
@@ -42,4 +42,9 @@ export const getMoreList = (page) => {
 		})
 	}
 };
+
+export const toggleTopShow = (flag) => ({
+	type: TOGGLE_SCROLL_TOP,
+	flag,
+});
 

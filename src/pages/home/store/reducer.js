@@ -7,7 +7,7 @@
  *
  * Created by aYang on 2019-04-15
  */
-import {CHANGE_HOME_DATA,ADD_HOME_LIST} from "./constants";
+import {CHANGE_HOME_DATA,ADD_HOME_LIST,TOGGLE_SCROLL_TOP} from "./constants";
 
 import {fromJS} from "immutable";
 
@@ -16,6 +16,7 @@ const  defaultState = fromJS({
 	articleList:[],
 	recommendList:[],
 	articlePage:1,
+	showScroll:false,
 });
 
 export default (state = defaultState, action) => {
@@ -31,6 +32,8 @@ export default (state = defaultState, action) => {
 				articleList:state.get('articleList').concat(fromJS(action.articleList)),
 				articlePage:action.nextPage,
 			});
+		case TOGGLE_SCROLL_TOP:
+			return state.set('showScroll',action.flag);
 		default:
 			return state;
 	}
