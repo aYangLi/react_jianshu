@@ -15,6 +15,7 @@ export const HeaderWrap = styled.header`
 	position:relative;
 	height: 56px;
 	border-bottom: 1px solid #f0f0f0;
+	z-index: 2;
 `;
 
 export const Logo = styled.div`
