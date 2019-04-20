@@ -71,7 +71,7 @@ class Header extends PureComponent{
 		return (
 			<HeaderWrap>
 				<Link to='/'>
-					<Logo></Logo>
+					<Logo/>
 				</Link>
 				<Nav>
 					<NavItem className='left active'>首页</NavItem>
@@ -93,17 +93,19 @@ class Header extends PureComponent{
 								className = {focused ?'focused':''}
 								onFocus = {() => {handleInputFocus(list)}}
 								onBlur = {handleInputBlur}
-							></NavSearch>
+							/>
 						</CSSTransition>
 						<span className= {focused ?'focused iconfont zoom':'iconfont zoom'}>&#xe699;</span>
 						{this.getListArea()}
 					</SearchWrap>
 				</Nav>
 				<Addition>
-					<Buttion className='writing'>
-						<span className="iconfont">&#xe616;</span>
-						写文章
-					</Buttion>
+					<Link to='/write'>
+						<Buttion className='writing'>
+							<span className="iconfont">&#xe616;</span>
+							写文章
+						</Buttion>
+					</Link>
 					<Buttion className='reg'>注册</Buttion>
 				</Addition>
 			</HeaderWrap>

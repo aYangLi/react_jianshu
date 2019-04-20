@@ -17,6 +17,7 @@ import {connect} from "react-redux";
 import {actionCreators} from './store';
 
 class Detail extends  PureComponent {
+
 	render() {
 		const {title,content} = this.props;
 		return (
@@ -26,6 +27,7 @@ class Detail extends  PureComponent {
 			</DetailWrapper>
 		)
 	}
+
 	componentDidMount() {
 		this.props.getDetail(this.props.match.params.id);
 	}
